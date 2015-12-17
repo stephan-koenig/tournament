@@ -131,12 +131,7 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    standings = DB().execute("SELECT * FROM standings order by wins DESC,RANDOM();", (), "all", False)
-    standings = [(int(row[0]), str(row[1]), int(row[2]), int(row[3])) for row
-                 in standings]
-    pairings = []
-    for idx in range(0, len(standings), 2):
-        id1, name1 = standings[idx][0], standings[idx][1]
-        id2, name2 = standings[idx + 1][0], standings[idx + 1][1]
-        pairings.append((id1, name1, id2, name2))
+    pairings = DB().execute("SELECT * FROM pairings;", (), "all", False)
+    pairings = [(int(row[0]), str(row[1]), int(row[2]), str(row[3])) for row
+                in pairings]
     return pairings

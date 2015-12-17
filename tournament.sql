@@ -35,7 +35,8 @@ CREATE VIEW player1 AS SELECT id AS id1, name AS name1, row FROM standings
 CREATE VIEW player2 AS SELECT id AS id2, name AS name2, row FROM standings
     EXCEPT SELECT * FROM player1;
 
-CREATE VIEW pairings AS SELECT DISTINCT ON (player1.row) id1, name1, id2, name2 FROM player1, player2
+CREATE VIEW pairings AS SELECT DISTINCT ON (player1.row) id1, name1, id2, name2
+    FROM player1, player2
     WHERE player1.row = (player2.row - 1) ORDER BY player1.row;
 
 insert into players values (default, 'Stephan Koenig');
